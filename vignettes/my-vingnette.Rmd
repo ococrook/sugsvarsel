@@ -1,0 +1,179 @@
+---
+title: " Statistical methods for clustering and variable selection implemented in the *sugsvaRsel* package"
+author: 
+- name: "Oliver  M. Crook"
+  affiliation: University of Cambridge
+output: BiocStyle::html_document2
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# Introduction {#sec:Intro}
+
+This vignette details the algorithms in the sugsvaRsel package, including how the data should be provided as well as some of the post processing function available. This included the original SUGS algorithm: Wang and Dunson (2011) as well as the SUGS VarSel algorithm of Crook et al. (2017)
+
+# Clustering with the SUGS algorithm
+
+The sequential updating and greedy search (SUGS) algorithm Wang and Dunson (2011) was proposed as a fast method for performing Bayesian inference in Dirichlet process mixture models.  Rather than using Markov chain Monte Carlo (MCMC) methods to sample from the posterior distribution of clusterings (partitions), the SUGS algorithm instead poses clustering as a Bayesian model selection problem.  First, a large number of possible clusterings is proposed, using an algorithm that takes a random ordering of the subjects, and greedily assigns them to clusters.  Each of these clusterings is then viewed as defining a model for the data, and Bayesian model selection is used to choose between them.  
+
+# Load the data
+
+
+Throughout the first section we will use some example data for clustering.
+
+```{r,message=FALSE}
+library("sugsvaRsel")
+data(Isomix)
+Isomix <- Isomix
+```
+
+# Viusalising the data 
+
+First we visualise the data, below we have a simple two dimensional example.
+
+```{r, fig.align='center', fig.width=6, fig.height=5}
+plot(Isomix$samplesIso, main = "Mixture of 5 Isotropic Gaussians",
+     col = Isomix$componentsIso, cex = 1)
+
+```
+
+# Applying the SUGS algorithm
+
+Our implementation requires that the data are provided as a numeric matrix with observations as rows and variables as columns. The example below has 250 observations and 2 variables. In the first slot we state the number of random orderings of the data. The example below shows 10 random orderings. The second slot is for our data and the final slot is for the Bayesian model selection criteria. To implement the suggestions by Wang and Dunson (2011) to use the Pseudo-Marginal Likelihood (PML) criteria we state Model = "PML", we may also state Model = "ML" if we wish to use the Marginal Likelihood. Our implementation also supports parallel processing using the *biocParallel* package, for now we set *BPPARAM = SerialParam()* so that the code is not excuted in parallel. There is a later section on using the parallelisation features.
+```{r}
+nrow(Isomix$samplesIso) #our data has 250 observations
+ncol(Isomix$samplesIso) #our data has 2 variables
+set.seed(314)
+clust <- runSugs(iter = 10, Isomix$samplesIso, Model = "PML", BPPARAM = SerialParam())
+```
+
+# Post processing
+
+The output returns a list of 4 values. The first, member, gives you the cluster allocations, the second, cluster, tells you the number of clusters, the third outputs the log PML, the fourth value gives you the random ordering that was used for the data. If we have cluster labels to check how well we performed then we can compute the adjusted Rand index. The cluster labels as stored in the data file. The code below calculates the adjusted Rand index for the clustering which maximised the Log PML against the true values. We must remember to reorder our labels in the same way the data was produced.
+
+```{r, message=FALSE}
+library("mcclust")
+arandi(clust$member[order(clust$LPML, decreasing=TRUE)[1], ],
+       Isomix$componentsIso[clust$ordering[order(clust$LPML,decreasing=TRUE)[1], ]])
+```
+
+In general, we do not have the cluster labels so we can visualise the clustering using the plot function
+
+```{r, fig.align='center', fig.width=6, fig.height=5}
+plot(Isomix$samplesIso[clust$ordering[order(clust$LPML,decreasing=TRUE)[1], ], ], 
+     main = "Mixture of 5 Isotropic Gaussians", xlab =  "x", ylab = "y", 
+     col = clust$member[order(clust$LPML,decreasing=TRUE)[1], ], cex = 1)
+```
+
+# Clustering and Variable selection with the *sugsvarsel* algorithm
+
+The SUGS algorithm is ill-suited to high dimensional data, since nuisance variable can degrade the clustering. The sugsvarsel algorithm proposed by Crook et al. (2017) allows simulatanious clustering and variable selection.
+
+Let us create 4 noisy variables and visualise
+```{r, fig.align='center', fig.width=6, fig.height=5}
+Noise <- matrix(rnorm(250*4, 0, 1), nrow = 250, ncol = 4)
+hist(Noise)
+IsoNoise <- cbind(Isomix$samplesIso, Noise)
+nrow(IsoNoise) #250 observations
+ncol(IsoNoise) #6 variables
+```
+
+The original SUGS algorithm struggles to cluster this data.
+```{r, cache=TRUE, fig.align='center', fig.width=6, fig.height=5}
+cc <- runSugs(iter = 30, IsoNoise, Model = "PML")
+arandi(cc$member[order(cc$LPML,decreasing=TRUE)[1], ],
+       Isomix$componentsIso[cc$ordering[order(cc$LPML,decreasing=TRUE)[1], ]])
+plot(Isomix$samplesIso[cc$ordering[order(cc$LPML,decreasing=TRUE)[1], ], ], 
+     main = "Mixture of 5 Isotropic Gaussians", xlab =  "x", ylab = "y", 
+     col = cc$member[order(cc$LPML,decreasing=TRUE)[1], ], cex = 1)
+
+```
+
+The *sugsvarsel* algorithm has 6 arguments. The first is the data, the second the number of internal iterations, the third is the number of random orderings, the fourth is an initial variable vector, the fifth element is the number of different variable vectors to use and the last entry is the model selection criteria. For more details see Crook et al. (2017), we advocate the use of the ML criteria for clustering and variable selection.
+
+We try and cluster the following settings. We perform only 1 internal variable selection iteration, with 10 random orderings and all variables are intially set as relevant. 
+
+```{r, cache = TRUE}
+res <- sugsvarsel(IsoNoise, 1, 10, rep(1,6), numSelect = 1, Model = "ML")
+```
+
+In general this works poorly, since it doesn't explore enough models and the clustering structure is dependant on the initial set of variables allocated as relevant. The following section explains how to implement the p-variate selection strategy as outline in the article Crook et al. (2017)
+
+# Implementation of the p-variate selection strategy.
+
+The p-variate selection strategy is outline in the article Crook et al. (2017). This method is implemented in the function *pSelect*. The *pSelect* function has 5 arguements: the data, number of random orderings, the number of variables selected, the number of times to randomly select variable and the Model selection criteria. We select 3 variable each time for 10 random orderings of the data and we select 3 random variables 6 times.
+
+
+```{r}
+set.seed(314)
+p <- floor(ncol(IsoNoise)/2)
+iter <- 10
+numSelect <- ncol(IsoNoise)
+intfeatures <- pSelect(IsoNoise, iter, p, numSelect, Model="ML", BPPARAM = SerialParam())
+```
+We can now apply 30 random orderings of the SUGS VarSel algorithm:
+```{r}
+Result <- sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model="ML", BPPARAM = SerialParam())
+```
+We can check the adjusted Rand index produced.
+```{r}
+arandi(Result$member[,order(Result$ML,decreasing=TRUE)[1]], Isomix$componentsIso[Result$ordering[,order(Result$ML,decreasing=TRUE)[1]]])
+```
+We can also see which variables were chosen as relevant and irrelevant. Those that are irrelevant are 0 and those that are relevant are 1.
+```{r}
+Result$features[,which.max(Result$ML)]
+```
+We can see that the sugsvarsel algorithm quickly finds a superior clustering to the original sugs algorithm and correctly partions the variables into relevant and irrelevant. We can visualise the clustering produced.
+```{r, fig.align='center', fig.width=6, fig.height=5}
+plot(Isomix$samplesIso[Result$ordering[,order(Result$ML,decreasing=TRUE)[1]],], 
+     main = "Mixture of 5 Isotropic Gaussians", xlab =  "x", ylab = "y", 
+     col = Result$member[, order(Result$ML,decreasing=TRUE)[1]], cex = 1)
+```
+
+# Implementation of Bayesian model averaging functions
+
+The *sugsvaRsel* package also contains function to perform bayesian model averaging, which we explain in this section. First we must choose the size of Occam's Window, see Crook et al. (2017) for more details. We find that a value of 100 includes plenty of models whilst still not being computationally burdensome. The first entry is the log ML output from the *sugsvarsel* function and the second is the size of Occam's Window. The function automatically normalises and coverts the values to probabilties.
+```{r}
+MLnorm <- occamsWindow(Result$ML, 100)
+```
+The Bayesian model averaging step is included in the *bma* function. This need 3 inputs: The numerical data matrix, the output of the *occamsWindow* function and the full output from the *sugsvarsel* algorithm. This requires the *Matrix* package.
+```{r, message=FALSE}
+bavg <- bma(IsoNoise, MLnorm, Result)
+```
+A standard way to visualise the clustering result is to plot a heatmap.
+```{r, fig.align='center', fig.width=6, fig.height=5}
+heatmap(bavg$Asim, scale = "none")
+```
+We can visualise the variable selection output in a barplot
+```{r, fig.align='center', fig.width=6, fig.height=5}
+barplot(t(bavg$Fsim), main = "Bayesian model averaging applied to variable selection", xlab = "variables", ylab = "Probability of selection")
+```
+
+# Exploiting Parallelism within *sugsvaRsel*
+
+The algorithms SUGS and SUGS VarSel are applied over different random orderings of the data. This process is embarrassingly parallel and this package is set up to do automated parallelisation over the orderings using the *BiocParallel* package. In the rest of this vignette 
+we have computed in serial because it is actually faster because of the overhead requried to parallelise, however for a large number of random orderings and for much larger datasets exploiting parallelisation can make vast improvements. For functions in this package where parallelism can be exploited we take *BPPARAM*, an instance of a *BiocParallelParam* class, as a parameter. If no backend is provided then execution is in parallel by default, by using *bpparam()*, else we can specify the back-end for example using *SnowParam*. We provide a few example below and show that it is not always necassary to execute the algorithm is parallel. See the *BiocParallel* package for more information.
+
+The function is executed in parallel by default
+```{r, cache = TRUE}
+system.time(sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model="ML"))
+```
+To run the code in serial, which is recommended for small dataset size and a few number of iterations, is demonstrated below.
+```{r, cache = TRUE}
+system.time(sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model="ML", BPPARAM = SerialParam()))
+```
+For a larger dataset or lot of iteration computing in parallel will give significant speed ups.
+```{r, cache = TRUE}
+system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML", BPPARAM = SerialParam()))
+
+system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML"))
+```
+If you would like to specifiy a specifc back-end you can provide an instance of a *BiocParallelParam* class. First check the possible registered back-ends and then assign appropriately.
+```{r, cache = TRUE}
+registered()
+param <- SnowParam(workers = 4, type = "SOCK")
+system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML", BPPARAM = param))
+```

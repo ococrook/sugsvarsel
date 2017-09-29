@@ -1,0 +1,17 @@
+citHeader("To cite sugsvaRsel in publications use:")
+
+citEntry(entry = "Article",
+title = "Fast Bayesian inference in Dirichlet process mixture models",
+author = personList(as.person(" Lianming Wang"), as.person("David B. Dunson")),
+journal = "Journal of Computational and Graphical Statistics",
+year = "2011",
+volume = "20",
+pages = "196--216",
+
+textVersion =
+  paste("Wang, Lianming, and David B. Dunson.",
+              "Fast Bayesian inference in Dirichlet process mixture models.",
+              "Journal of Computational and Graphical Statistics, 20.1 (2011): 196-216."
+  )
+
+)

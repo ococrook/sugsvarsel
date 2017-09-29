@@ -1,0 +1,12 @@
+useDynLib(sugsvaRsel)
+import(Rcpp)
+
+export(sugs)
+export(runSugs)
+export(sugsvarsel)
+export(pSelect)
+export(samplemixNoise)
+export(sampleMix)
+export(samplemixDiag)
+export(occamsWindow)
+export(bma)
