@@ -1,4 +1,4 @@
-Package: sugsvaRsel
+Package: sugsvarsel
 Type: Package
 Title: SUGS algorithm of Wang and Dunson (2011), SUGS VarSel algorithm Crook et al.
 Version: 0.1.0
