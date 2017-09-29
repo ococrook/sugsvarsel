@@ -19,7 +19,7 @@ Depends:
       mnormt,
       mcclust
 License: What license is it under?
-Encoding: UTF-8
+Encoding: GPL-2
 LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
