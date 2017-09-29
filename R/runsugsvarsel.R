@@ -57,7 +57,7 @@ runsugsvarsel<-function(mydata,
   res <- bplapply(rand, function(x, mydata, featInt, Model, T, mu_0, lambda_0, nu_0, S_0,
                                  betaHat, a, b, w) {
 
-                          suppressMessages(library(sugsvaRsel))
+                          suppressMessages(library(sugsvarsel))
                           for(t in 1:T){
                             res <- sugsComp(mydata[x,], featInt, Model, mu_0 = mu_0,
                                           lambda_0 = lambda_0, nu_0 = nu_0, S_0 = S_0,
