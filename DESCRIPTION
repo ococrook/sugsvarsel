@@ -18,8 +18,8 @@ Depends:
       Rcpp,
       mnormt,
       mcclust
-License: What license is it under?
-Encoding: GPL-2
+License: GPL-2
+Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
