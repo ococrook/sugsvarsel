@@ -1,6 +1,6 @@
 Package: sugsvaRsel
 Type: Package
-Title: SUGS algorithm of Wang and Dunson (2011), SUGS with feature selection algorithm Crook et al
+Title: SUGS algorithm of Wang and Dunson (2011), SUGS VarSel algorithm Crook et al.
 Version: 0.1.0
 Author: Oliver M. Crook, Laurent Gatto, Paul DW Kirk
 Maintainer: The package maintainer <omc25@cam.ac.uk>
