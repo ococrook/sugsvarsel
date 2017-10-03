@@ -1,4 +1,4 @@
-citHeader("To cite sugsvaRsel in publications use:")
+citHeader("To cite sugsvarsel in publications use:")
 
 citEntry(entry = "Article",
 title = "Fast Bayesian inference in Dirichlet process mixture models",
