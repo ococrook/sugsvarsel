@@ -1,9 +1,9 @@
 ---
-title: " Statistical methods for clustering and variable selection implemented in the *sugsvaRsel* package"
+title: " Statistical methods for clustering and variable selection implemented in the *sugsvarsel* package"
 author: 
 - name: "Oliver  M. Crook"
   affiliation: University of Cambridge
-output: BiocStyle::html_document2
+output: BiocStyle::html_document2 
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,7 +13,7 @@ vignette: >
 
 # Introduction {#sec:Intro}
 
-This vignette details the algorithms in the sugsvaRsel package, including how the data should be provided as well as some of the post processing function available. This included the original SUGS algorithm: Wang and Dunson (2011) as well as the SUGS VarSel algorithm of Crook et al. (2017)
+This vignette details the algorithms in the sugsvarsel package, including how the data should be provided as well as some of the post processing function available. This included the original SUGS algorithm: Wang and Dunson (2011) as well as the SUGS VarSel algorithm of Crook et al. (2017)
 
 # Clustering with the SUGS algorithm
 
@@ -25,12 +25,12 @@ The sequential updating and greedy search (SUGS) algorithm Wang and Dunson (2011
 Throughout the first section we will use some example data for clustering.
 
 ```{r,message=FALSE}
-library("sugsvaRsel")
+library("sugsvarsel")
 data(Isomix)
 Isomix <- Isomix
 ```
 
-# Viusalising the data 
+# Visualising the data 
 
 First we visualise the data, below we have a simple two dimensional example.
 
@@ -135,7 +135,7 @@ plot(Isomix$samplesIso[Result$ordering[,order(Result$ML,decreasing=TRUE)[1]],],
 
 # Implementation of Bayesian model averaging functions
 
-The *sugsvaRsel* package also contains function to perform bayesian model averaging, which we explain in this section. First we must choose the size of Occam's Window, see Crook et al. (2017) for more details. We find that a value of 100 includes plenty of models whilst still not being computationally burdensome. The first entry is the log ML output from the *sugsvarsel* function and the second is the size of Occam's Window. The function automatically normalises and coverts the values to probabilties.
+The *sugsvarsel* package also contains function to perform bayesian model averaging, which we explain in this section. First we must choose the size of Occam's Window, see Crook et al. (2017) for more details. We find that a value of 100 includes plenty of models whilst still not being computationally burdensome. The first entry is the log ML output from the *sugsvarsel* function and the second is the size of Occam's Window. The function automatically normalises and coverts the values to probabilties.
 ```{r}
 MLnorm <- occamsWindow(Result$ML, 100)
 ```
@@ -151,8 +151,11 @@ We can visualise the variable selection output in a barplot
 ```{r, fig.align='center', fig.width=6, fig.height=5}
 barplot(t(bavg$Fsim), main = "Bayesian model averaging applied to variable selection", xlab = "variables", ylab = "Probability of selection")
 ```
-
-# Exploiting Parallelism within *sugsvaRsel*
+We can maximise the posterior adjusted rand index to obtain a summary cluster form the bayesian model averaged clustering
+```{r}
+mp <- maxpear(bavg$Asim)
+```
+# Exploiting Parallelism within *sugsvarsel*
 
 The algorithms SUGS and SUGS VarSel are applied over different random orderings of the data. This process is embarrassingly parallel and this package is set up to do automated parallelisation over the orderings using the *BiocParallel* package. In the rest of this vignette 
 we have computed in serial because it is actually faster because of the overhead requried to parallelise, however for a large number of random orderings and for much larger datasets exploiting parallelisation can make vast improvements. For functions in this package where parallelism can be exploited we take *BPPARAM*, an instance of a *BiocParallelParam* class, as a parameter. If no backend is provided then execution is in parallel by default, by using *bpparam()*, else we can specify the back-end for example using *SnowParam*. We provide a few example below and show that it is not always necassary to execute the algorithm is parallel. See the *BiocParallel* package for more information.

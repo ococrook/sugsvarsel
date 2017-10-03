@@ -73,7 +73,7 @@ runSugs <- function(iter,
 
   res <- bplapply(rand, function(x, mydata, Model, mu_0, lambda_0, nu_0, S_0,
                                  betaHat, a, b){
-                        suppressMessages(library(sugsvaRsel))
+                        suppressMessages(library(sugsvarsel))
                         sugs(mydata[x,], Model, mu_0 = mu_0, lambda_0 = lambda_0,
                               nu_0 = nu_0, S_0 = S_0, betaHat = betaHat, a = a, b = b)
                           },
