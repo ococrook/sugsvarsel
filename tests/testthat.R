@@ -1,4 +1,4 @@
 library(testthat)
-library(sugsvaRsel)
+library(sugsvarsel)
 
-test_check("sugsvaRsel")
+test_check("sugsvarsel")
