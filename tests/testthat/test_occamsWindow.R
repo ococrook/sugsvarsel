@@ -1,4 +1,4 @@
-library("sugsvaRsel")
+library("sugsvarsel")
 context("occamsWindow")
 
 
