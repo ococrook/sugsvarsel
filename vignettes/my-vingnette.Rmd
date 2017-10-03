@@ -82,7 +82,7 @@ ncol(IsoNoise) #6 variables
 ```
 
 The original SUGS algorithm struggles to cluster this data.
-```{r, cache=TRUE, fig.align='center', fig.width=6, fig.height=5}
+```{r, cache=F, fig.align='center', fig.width=6, fig.height=5}
 cc <- runSugs(iter = 30, IsoNoise, Model = "PML")
 arandi(cc$member[order(cc$LPML,decreasing=TRUE)[1], ],
        Isomix$componentsIso[cc$ordering[order(cc$LPML,decreasing=TRUE)[1], ]])
@@ -96,7 +96,7 @@ The *sugsvarsel* algorithm has 6 arguments. The first is the data, the second th
 
 We try and cluster the following settings. We perform only 1 internal variable selection iteration, with 10 random orderings and all variables are intially set as relevant. 
 
-```{r, cache = TRUE}
+```{r, cache = F}
 res <- sugsvarsel(IsoNoise, 1, 10, rep(1,6), numSelect = 1, Model = "ML")
 ```
 
@@ -161,21 +161,21 @@ The algorithms SUGS and SUGS VarSel are applied over different random orderings 
 we have computed in serial because it is actually faster because of the overhead requried to parallelise, however for a large number of random orderings and for much larger datasets exploiting parallelisation can make vast improvements. For functions in this package where parallelism can be exploited we take *BPPARAM*, an instance of a *BiocParallelParam* class, as a parameter. If no backend is provided then execution is in parallel by default, by using *bpparam()*, else we can specify the back-end for example using *SnowParam*. We provide a few example below and show that it is not always necassary to execute the algorithm is parallel. See the *BiocParallel* package for more information.
 
 The function is executed in parallel by default
-```{r, cache = TRUE}
+```{r, cache = F}
 system.time(sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model="ML"))
 ```
 To run the code in serial, which is recommended for small dataset size and a few number of iterations, is demonstrated below.
-```{r, cache = TRUE}
+```{r, cache = F}
 system.time(sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model="ML", BPPARAM = SerialParam()))
 ```
 For a larger dataset or lot of iteration computing in parallel will give significant speed ups.
-```{r, cache = TRUE}
+```{r, cache = F}
 system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML", BPPARAM = SerialParam()))
 
 system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML"))
 ```
 If you would like to specifiy a specifc back-end you can provide an instance of a *BiocParallelParam* class. First check the possible registered back-ends and then assign appropriately.
-```{r, cache = TRUE}
+```{r, cache = F}
 registered()
 param <- SnowParam(workers = 4, type = "SOCK")
 system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML", BPPARAM = param))
