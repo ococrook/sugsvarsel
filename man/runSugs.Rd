@@ -38,7 +38,7 @@ both for model selection. "Both" defaults to PML.}
     \code{BiocParallelParam} parameter instance: \code{SnowParam},
     \code{MulticoreParam}, \code{DoparParam}, \ldots see the
     \code{BiocParallel} package for details. To revert to the
-    origianl serial implementation, use \code{NULL}.}
+    origianl serial implementation, use \code{serialParam}.}
 }
 \value{
 A matrix of cluster allocation, K the number of clusters, a matrix

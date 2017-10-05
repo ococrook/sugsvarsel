@@ -7,7 +7,7 @@
 sugsvarsel(X, featiter, clustiter, intfeatures, numSelect, Model, mu_0 = NULL,
   lambda_0 = 0.01, nu_0 = NULL, S_0 = NULL, betaHat = c(0.01, 0.1, 1, 5,
   10, 15, 30, 50, 100), a = 10, b = 1, w = c(0.5, 0.5),
-  BPPARAM = bpparam())
+  BPPARAM = bpparam(), Verbose = T)
 }
 \arguments{
 \item{X}{A data matrix with rows as observations.}
