@@ -1,7 +1,7 @@
 #' The SUGS clustering algorithm by Wang and Dunson (2011)
 #'
 #' @import BiocParallel
-#'
+#' @useDynLib sugsvarsel
 #' @param mydata Data matrix with observations as rows
 #' @param Model Character string indicating whether to use PML, ML or
 #' both for model selection. "Both" defaults to PML.
