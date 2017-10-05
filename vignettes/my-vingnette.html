@@ -260,7 +260,7 @@ intfeatures &lt;- pSelect(IsoNoise, iter, p, numSelect, Model=&quot;ML&quot;, BP
 ##  Starting initial iteration 5
 ##  Starting initial iteration 6</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.16    0.09   21.62</code></pre>
+##    0.22    0.10   22.14</code></pre>
 <p>To run the code in serial, which is recommended for small dataset size and a few number of iterations, is demonstrated below.</p>
 <pre class="r"><code>system.time(sugsvarsel(IsoNoise, 1, 30, intfeatures, numSelect, Model=&quot;ML&quot;, BPPARAM = SerialParam()))</code></pre>
 <pre><code>## 
@@ -271,7 +271,7 @@ intfeatures &lt;- pSelect(IsoNoise, iter, p, numSelect, Model=&quot;ML&quot;, BP
 ##  Starting initial iteration 5
 ##  Starting initial iteration 6</code></pre>
 <pre><code>##    user  system elapsed 
-##    2.66    0.00    2.66</code></pre>
+##    2.34    0.02    2.36</code></pre>
 <p>For a larger dataset or lot of iteration computing in parallel will give significant speed ups.</p>
 <pre class="r"><code>system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model=&quot;ML&quot;, BPPARAM = SerialParam()))</code></pre>
 <pre><code>## 
@@ -282,7 +282,7 @@ intfeatures &lt;- pSelect(IsoNoise, iter, p, numSelect, Model=&quot;ML&quot;, BP
 ##  Starting initial iteration 5
 ##  Starting initial iteration 6</code></pre>
 <pre><code>##    user  system elapsed 
-##    8.76    0.16    9.02</code></pre>
+##    7.89    0.05    7.94</code></pre>
 <pre class="r"><code>system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model=&quot;ML&quot;))</code></pre>
 <pre><code>## 
 ##  Starting initial iteration 1
@@ -292,7 +292,7 @@ intfeatures &lt;- pSelect(IsoNoise, iter, p, numSelect, Model=&quot;ML&quot;, BP
 ##  Starting initial iteration 5
 ##  Starting initial iteration 6</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.14    0.14   27.63</code></pre>
+##    0.18    0.14   23.97</code></pre>
 <p>If you would like to specifiy a specifc back-end you can provide an instance of a <em>BiocParallelParam</em> class. First check the possible registered back-ends and then assign appropriately.</p>
 <pre class="r"><code>registered()</code></pre>
 <pre><code>## $SnowParam
@@ -321,7 +321,7 @@ system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model=&quot;ML&
 ##  Starting initial iteration 5
 ##  Starting initial iteration 6</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.08    0.04   19.06</code></pre>
+##    0.15    0.08   18.86</code></pre>
 </div>
 
 

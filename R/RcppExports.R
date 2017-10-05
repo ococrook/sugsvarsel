@@ -13,7 +13,7 @@
 NULL
 
 phiUpdatecpp <- function(phi, i, clustnew, n, betaHat) {
-    .Call('_sugsvaRsel_phiUpdatecpp', PACKAGE = 'sugsvaRsel', phi, i, clustnew, n, betaHat)
+    .Call('_sugsvarsel_phiUpdatecpp', PACKAGE = 'sugsvarsel', phi, i, clustnew, n, betaHat)
 }
 
 #' A C++ accelerated version of sugsclusterProb
@@ -34,7 +34,7 @@ phiUpdatecpp <- function(phi, i, clustnew, n, betaHat) {
 #' @return An arma::vec containg the probability that observation \code{x} belongs to each component
 #' @export
 sugsclusterProbcpp <- function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda) {
-    .Call('_sugsvaRsel_sugsclusterProbcpp', PACKAGE = 'sugsvaRsel', x, K, i, D, n, betaHat, phi, m, nu, S, lambda)
+    .Call('_sugsvarsel_sugsclusterProbcpp', PACKAGE = 'sugsvarsel', x, K, i, D, n, betaHat, phi, m, nu, S, lambda)
 }
 
 #' A C++ accelerated version of sugsclusterMarg
@@ -55,7 +55,7 @@ sugsclusterProbcpp <- function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda) {
 #' @return An arma::vec containg the probability that observation \code{x} belongs to each component
 #' @export
 sugsclustMargcpp <- function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intfeature) {
-    .Call('_sugsvaRsel_sugsclustMargcpp', PACKAGE = 'sugsvaRsel', x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intfeature)
+    .Call('_sugsvarsel_sugsclustMargcpp', PACKAGE = 'sugsvarsel', x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intfeature)
 }
 
 #' A C++ accelerated version of sugsnewclustMarg
@@ -65,7 +65,7 @@ sugsclustMargcpp <- function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intf
 #' @inheritParams sugs
 #' @return The unnormalised probability of belong to any of the currently unoccupied clusters.
 sugsnewclustMargcpp <- function(x, i, D, phi, betaHat, mu_0, nu_0, S_0, lambda_0, intfeature) {
-    .Call('_sugsvaRsel_sugsnewclustMargcpp', PACKAGE = 'sugsvaRsel', x, i, D, phi, betaHat, mu_0, nu_0, S_0, lambda_0, intfeature)
+    .Call('_sugsvarsel_sugsnewclustMargcpp', PACKAGE = 'sugsvarsel', x, i, D, phi, betaHat, mu_0, nu_0, S_0, lambda_0, intfeature)
 }
 
 #' A C++ accelerated version of sugscompPml
@@ -76,6 +76,6 @@ sugsnewclustMargcpp <- function(x, i, D, phi, betaHat, mu_0, nu_0, S_0, lambda_0
 #' @return The log PML.
 #' @export
 sugscompPmlcpp <- function(X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0, S_0) {
-    .Call('_sugsvaRsel_sugscompPmlcpp', PACKAGE = 'sugsvaRsel', X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0, S_0)
+    .Call('_sugsvarsel_sugscompPmlcpp', PACKAGE = 'sugsvarsel', X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0, S_0)
 }
 

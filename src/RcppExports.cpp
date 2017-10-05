@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // phiUpdatecpp
 NumericMatrix phiUpdatecpp(NumericMatrix phi, int i, int clustnew, NumericVector n, NumericVector betaHat);
-RcppExport SEXP _sugsvaRsel_phiUpdatecpp(SEXP phiSEXP, SEXP iSEXP, SEXP clustnewSEXP, SEXP nSEXP, SEXP betaHatSEXP) {
+RcppExport SEXP _sugsvarsel_phiUpdatecpp(SEXP phiSEXP, SEXP iSEXP, SEXP clustnewSEXP, SEXP nSEXP, SEXP betaHatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23,7 +23,7 @@ END_RCPP
 }
 // sugsclusterProbcpp
 arma::vec sugsclusterProbcpp(NumericVector x, int K, int i, int D, NumericVector n, NumericVector betaHat, NumericMatrix phi, NumericMatrix m, NumericVector nu, NumericMatrix S, NumericVector lambda);
-RcppExport SEXP _sugsvaRsel_sugsclusterProbcpp(SEXP xSEXP, SEXP KSEXP, SEXP iSEXP, SEXP DSEXP, SEXP nSEXP, SEXP betaHatSEXP, SEXP phiSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP SSEXP, SEXP lambdaSEXP) {
+RcppExport SEXP _sugsvarsel_sugsclusterProbcpp(SEXP xSEXP, SEXP KSEXP, SEXP iSEXP, SEXP DSEXP, SEXP nSEXP, SEXP betaHatSEXP, SEXP phiSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP SSEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -44,7 +44,7 @@ END_RCPP
 }
 // sugsclustMargcpp
 arma::vec sugsclustMargcpp(NumericVector x, int K, int i, int D, NumericVector n, NumericVector betaHat, NumericMatrix phi, NumericMatrix m, NumericVector nu, NumericMatrix S, NumericVector lambda, arma::rowvec intfeature);
-RcppExport SEXP _sugsvaRsel_sugsclustMargcpp(SEXP xSEXP, SEXP KSEXP, SEXP iSEXP, SEXP DSEXP, SEXP nSEXP, SEXP betaHatSEXP, SEXP phiSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP SSEXP, SEXP lambdaSEXP, SEXP intfeatureSEXP) {
+RcppExport SEXP _sugsvarsel_sugsclustMargcpp(SEXP xSEXP, SEXP KSEXP, SEXP iSEXP, SEXP DSEXP, SEXP nSEXP, SEXP betaHatSEXP, SEXP phiSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP SSEXP, SEXP lambdaSEXP, SEXP intfeatureSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -66,7 +66,7 @@ END_RCPP
 }
 // sugsnewclustMargcpp
 arma::vec sugsnewclustMargcpp(NumericVector x, int i, int D, NumericMatrix phi, NumericVector betaHat, NumericVector mu_0, double nu_0, NumericVector S_0, double lambda_0, arma::rowvec intfeature);
-RcppExport SEXP _sugsvaRsel_sugsnewclustMargcpp(SEXP xSEXP, SEXP iSEXP, SEXP DSEXP, SEXP phiSEXP, SEXP betaHatSEXP, SEXP mu_0SEXP, SEXP nu_0SEXP, SEXP S_0SEXP, SEXP lambda_0SEXP, SEXP intfeatureSEXP) {
+RcppExport SEXP _sugsvarsel_sugsnewclustMargcpp(SEXP xSEXP, SEXP iSEXP, SEXP DSEXP, SEXP phiSEXP, SEXP betaHatSEXP, SEXP mu_0SEXP, SEXP nu_0SEXP, SEXP S_0SEXP, SEXP lambda_0SEXP, SEXP intfeatureSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -86,7 +86,7 @@ END_RCPP
 }
 // sugscompPmlcpp
 arma::vec sugscompPmlcpp(NumericMatrix X, int K, int N, int D, NumericVector n, NumericMatrix phi, NumericVector betaHat, NumericMatrix m, NumericVector nu, NumericVector lambda, NumericMatrix S, NumericVector mu_0, double nu_0, double lambda_0, NumericVector S_0);
-RcppExport SEXP _sugsvaRsel_sugscompPmlcpp(SEXP XSEXP, SEXP KSEXP, SEXP NSEXP, SEXP DSEXP, SEXP nSEXP, SEXP phiSEXP, SEXP betaHatSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP lambdaSEXP, SEXP SSEXP, SEXP mu_0SEXP, SEXP nu_0SEXP, SEXP lambda_0SEXP, SEXP S_0SEXP) {
+RcppExport SEXP _sugsvarsel_sugscompPmlcpp(SEXP XSEXP, SEXP KSEXP, SEXP NSEXP, SEXP DSEXP, SEXP nSEXP, SEXP phiSEXP, SEXP betaHatSEXP, SEXP mSEXP, SEXP nuSEXP, SEXP lambdaSEXP, SEXP SSEXP, SEXP mu_0SEXP, SEXP nu_0SEXP, SEXP lambda_0SEXP, SEXP S_0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -111,15 +111,15 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_sugsvaRsel_phiUpdatecpp", (DL_FUNC) &_sugsvaRsel_phiUpdatecpp, 5},
-    {"_sugsvaRsel_sugsclusterProbcpp", (DL_FUNC) &_sugsvaRsel_sugsclusterProbcpp, 11},
-    {"_sugsvaRsel_sugsclustMargcpp", (DL_FUNC) &_sugsvaRsel_sugsclustMargcpp, 12},
-    {"_sugsvaRsel_sugsnewclustMargcpp", (DL_FUNC) &_sugsvaRsel_sugsnewclustMargcpp, 10},
-    {"_sugsvaRsel_sugscompPmlcpp", (DL_FUNC) &_sugsvaRsel_sugscompPmlcpp, 15},
+    {"_sugsvarsel_phiUpdatecpp", (DL_FUNC) &_sugsvarsel_phiUpdatecpp, 5},
+    {"_sugsvarsel_sugsclusterProbcpp", (DL_FUNC) &_sugsvarsel_sugsclusterProbcpp, 11},
+    {"_sugsvarsel_sugsclustMargcpp", (DL_FUNC) &_sugsvarsel_sugsclustMargcpp, 12},
+    {"_sugsvarsel_sugsnewclustMargcpp", (DL_FUNC) &_sugsvarsel_sugsnewclustMargcpp, 10},
+    {"_sugsvarsel_sugscompPmlcpp", (DL_FUNC) &_sugsvarsel_sugscompPmlcpp, 15},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_sugsvaRsel(DllInfo *dll) {
+RcppExport void R_init_sugsvarsel(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
