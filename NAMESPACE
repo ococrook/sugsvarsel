@@ -1,5 +1,6 @@
 useDynLib(sugsvarsel)
 import(Rcpp)
+importFrom("stats", "dgamma", "rnorm", "var")
 
 export(sugs)
 export(runSugs)
