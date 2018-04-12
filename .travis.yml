@@ -1,0 +1,28 @@
+language: r
+r: r-devel
+cache: packages
+sudo: false
+dist: trusty
+
+# r_check_args:
+#   --no-vignettes
+#   --no-build-vignettes
+
+# r_build_args:
+#   --no-build-vignettes
+  
+after_success:
+  - travis wait 20 Rscript -e 'covr::codecov()'
+
+after_failure:
+  - find *Rcheck -name '*.fail' -print -exec cat '{}' \;
+
+# # print timings (of examples) and sysinfo
+# after_script:
+#   - dump_logs_by_extension "timings"
+#   - dump_sysinfo
+
+notifications:
+  email:
+    on_success: omc25@cam.ac.uk
+    on_failure: omc25@cam.ac.uk
