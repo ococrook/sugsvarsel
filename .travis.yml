@@ -1,7 +1,8 @@
 language: r
-cache: packages
 sudo: false
 dist: trusty
+
+install:
 
 # r_check_args:
 #   --no-vignettes
