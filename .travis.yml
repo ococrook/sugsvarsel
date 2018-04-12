@@ -16,7 +16,11 @@ after_success:
 
 after_failure:
   - find *Rcheck -name '*.fail' -print -exec cat '{}' \;
-
+  
+## Use patched devtools
+r_github_packages:
+  - hadley/devtools@efa894ffa  
+  
 # # print timings (of examples) and sysinfo
 # after_script:
 #   - dump_logs_by_extension "timings"
