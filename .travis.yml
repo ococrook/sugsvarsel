@@ -19,7 +19,7 @@ after_failure:
   
 ## Use patched devtools
 r_github_packages:
-  - hadley/devtools@efa894ffa  
+  - hadley/devtools  
   
 # # print timings (of examples) and sysinfo
 # after_script:
