@@ -64,6 +64,7 @@ sugsclusterProb<-function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda){
 #' A function to compute the probability of belonging to an unoccupied cluster for the SUGS algorithm
 #'
 #' @inheritParams sugsclusterProb
+#' @inheritParams sugsComp
 #'
 #' @return The unnormlised probability of the observation belonging to a new cluster
 

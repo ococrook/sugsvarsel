@@ -1,6 +1,7 @@
 #' Function to sequentially update statistics and posterior in SUGS (Gaussian mixtures)
 #' @param x The observation currently under considetion
 #' @param K The number of currently occupied clusters
+#' @param clustnew The new proposed cluster to add new statistics
 #' @param n The vector indicating the number of observations in each cluster
 #' @param x_bar The sample mean statistics
 #' @param SCL The sample variable statistics
@@ -10,7 +11,7 @@
 #' @param nu The current posterior degrees of freedom
 #' @param beta The current posterior concentration parameter (not currently used in this implementation)
 #' @param S_0 The prior scale vector
-#' @param lamda_0 The prior mean variance
+#' @param lambda_0 The prior mean variance
 #' @param mu_0 The prior mean
 #' @param nu_0 The prior degrees of freedom
 #'

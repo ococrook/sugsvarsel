@@ -8,6 +8,7 @@
 #' @param numSelect The total number of feature sets for the algorithm to intialise.
 #' @param Model The method used for Model select, either PML, ML or Both. If you select both
 #' the PML will be used to perform model selection.
+#' @param mu_0 The mean hyperparameter, default is the column means of the data matrix.
 #' @param lambda_0 The variance of the Guassian mean prior, the dafault value is \code{0.01}.
 #' @param nu_0 The degrees of freedom hyperparameter, the default value is \code{D}, where \code{D} is the number of variables.
 #' @param S_0 The scale hyperparamter, the deault value is a tenth of the column variance of the data matrix.
@@ -17,6 +18,7 @@
 #' @param w The prior probability of a variable belong to the irrelevant or relevant partition. The vector must
 #' contain two entries the first entry being the probabiliy of being irreleavnt and the second being the probability of being relevant
 #' The default value is \code{c(0.5,0.5)}.
+#' @param Verbose Boolean to indicate whether or not to print curren iteration state
 #' @param BPPARAM Support for parallel processing using the
 #' \code{BiocParallel} infrastructure. When missing (default),
 #'     the default registered \code{BiocParallelParam} parameters are
@@ -25,6 +27,7 @@
 #'     \code{MulticoreParam}, \code{DoparParam}, \ldots see the
 #'     \code{BiocParallel} package for details. To revert to the
 #'     origianl serial implementation, use \code{NULL}.
+#'     
 #'
 #'
 #' @return A vector of log marginal likelihoods, a matrix of memberships, the reorderings of the data and the associated feature sets.

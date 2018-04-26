@@ -2,13 +2,14 @@
 #'
 #' @inheritParams addStatsDiag
 #' @inheritParams sugsComp
-#' @param member A vector of cluster membership allocaations
+#' @param member A vector of cluster membership allocations
+#' @param X The data matrix with observations as rows.
 #' @param numclust The total number of occupied clusters
 #'
 #' @return The posterior hyperparameters for the normal inverse chisquared distribution
 
 
-compsugsStats<-function(n, nu_0, lambda_0, mu_0, S_0, member, X, numclust){
+compsugsStats <- function(n, nu_0, lambda_0, mu_0, S_0, member, X, numclust){
 
   #compute statistics
   X <- X

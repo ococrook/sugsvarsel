@@ -4,7 +4,7 @@
 #'
 #' @usage data(Isomix)
 #'
-#' A dataset containing 250 observations and 2 variables with 5 clusters.
+#' @title A dataset containing 250 observations and 2 variables with 5 clusters.
 #'
 #' @format A list of length three. The data has 250 rows and 2 variables
 #' \describe{

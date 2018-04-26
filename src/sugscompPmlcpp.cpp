@@ -9,6 +9,8 @@ using namespace Rcpp ;
 //' @param X The data matrix with rows as observations
 //' @inheritParams sugsclustMargcpp
 //' @inheritParams sugs
+//' @param N The total number of people to be clustered
+//' 
 //' @return The log PML.
 //' @export
 // [[Rcpp::export]]

@@ -4,6 +4,7 @@
 #' @param K The number of clusters.
 #' @param i The current iteration state of the algorithm.
 #' @param D The number of variable in the data matrix.
+#' @param n The vector indicating the number of observations in each cluster
 #' @param betaHat The grid of concentration parameters.
 #' @param phi The probability weights of \code{beteHat}.
 #' @param m The current posterior mean.
@@ -76,7 +77,7 @@ sugsclustMarg<-function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intfeatur
 #' @param nu_0 The prior degrees of freedom.
 #' @param S_0 The prior scale vector.
 #' @param lambda_0 The prior mean variance.
-#' @param intfeature A binary vector indicating whether features are irrelevant (0) or relevant (1).
+#' @param intfeatures A binary vector indicating whether features are irrelevant (0) or relevant (1).
 #'
 #' @return The unnormalised probability of belong to any of the currently unoccupied clusters.
 

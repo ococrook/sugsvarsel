@@ -4,6 +4,7 @@
 #' @inheritParams sugsclusterProb
 #' @inheritParams sugsnewclusterProb
 #' @param X The data matrix with rows as observations
+#' @param N The total number of people to be clustered
 #'
 #' @return The log PML.
 
