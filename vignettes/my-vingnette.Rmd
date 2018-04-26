@@ -3,7 +3,7 @@ title: " Statistical methods for clustering and variable selection implemented i
 author: 
 - name: "Oliver  M. Crook"
   affiliation: University of Cambridge
-output: BiocStyle::html_document2 
+output: BiocStyle::html_document 
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
