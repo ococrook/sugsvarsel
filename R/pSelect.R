@@ -116,7 +116,7 @@ pSelect<-function(mydata,
     nu <- posterior$nu
     S  <- posterior$S
 
-    varMarg <- compvarMarg(numclust, D, n, lambda_0, nu_0, S_0, m, nu, lambda, S)
+    varMarg <- compvarMarg(K = numclust, D, n, lambda_0, nu_0, S_0, m, nu, lambda, S)
     intfeature[r,] <- sugsvarAlloc(D, varMarg, lognullMarg, rep(1,D), w)
 
   }
