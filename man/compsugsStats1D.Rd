@@ -11,7 +11,7 @@ compsugsStats1D(n, nu_0, lambda_0, mu_0, S_0, member, mydata, numclust)
 
 \item{nu_0}{The prior degrees of freedom}
 
-\item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
+\item{lambda_0}{The prior mean variance}
 
 \item{mu_0}{The prior mean}
 

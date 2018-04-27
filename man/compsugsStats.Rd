@@ -11,13 +11,15 @@ compsugsStats(n, nu_0, lambda_0, mu_0, S_0, member, X, numclust)
 
 \item{nu_0}{The prior degrees of freedom}
 
-\item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
+\item{lambda_0}{The prior mean variance}
 
 \item{mu_0}{The prior mean}
 
 \item{S_0}{The prior scale vector}
 
-\item{member}{A vector of cluster membership allocaations}
+\item{member}{A vector of cluster membership allocations}
+
+\item{X}{The data matrix with observations as rows.}
 
 \item{numclust}{The total number of occupied clusters}
 }

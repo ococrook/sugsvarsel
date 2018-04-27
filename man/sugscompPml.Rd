@@ -12,6 +12,8 @@ sugscompPml(X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0,
 
 \item{K}{The number of currently occupied clusters}
 
+\item{N}{The total number of people to be clustered}
+
 \item{D}{The number of variables}
 
 \item{n}{The vector indicating the number of observations in each cluster}
@@ -31,6 +33,8 @@ sugscompPml(X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0,
 \item{mu_0}{The prior mean}
 
 \item{nu_0}{The prior degrees of freedom}
+
+\item{lambda_0}{The prior mean variance}
 
 \item{S_0}{The prior scale vector}
 }

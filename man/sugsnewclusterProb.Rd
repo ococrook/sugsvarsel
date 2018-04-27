@@ -16,6 +16,14 @@ sugsnewclusterProb(x, i, D, phi, betaHat, mu_0, lambda_0, nu_0, S_0)
 \item{phi}{The weights associated with the dirichlet grid prior}
 
 \item{betaHat}{The grid of values for the dirichlet concentration parameter}
+
+\item{mu_0}{The mean hyperparameter, default is the column means of the data matrix.}
+
+\item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
+
+\item{nu_0}{The degrees of freedom hyperparameter, the default value is \code{D}, where \code{D} is the number of variables.}
+
+\item{S_0}{The scale hyperparamter, the deault value is a fifth of the column variance of the data matrix.}
 }
 \value{
 The unnormlised probability of the observation belonging to a new cluster

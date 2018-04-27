@@ -15,6 +15,8 @@ sugsclustMarg(x, K, i, D, n, betaHat, phi, m, nu, S, lambda, intfeature)
 
 \item{D}{The number of variable in the data matrix.}
 
+\item{n}{The vector indicating the number of observations in each cluster}
+
 \item{betaHat}{The grid of concentration parameters.}
 
 \item{phi}{The probability weights of \code{beteHat}.}

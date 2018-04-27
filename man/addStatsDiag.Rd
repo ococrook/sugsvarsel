@@ -12,6 +12,8 @@ addStatsDiag(x, K, clustnew, n, x_bar, SCL, m, lambda, S, nu, beta, S_0,
 
 \item{K}{The number of currently occupied clusters}
 
+\item{clustnew}{The new proposed cluster to add new statistics}
+
 \item{n}{The vector indicating the number of observations in each cluster}
 
 \item{x_bar}{The sample mean statistics}
@@ -30,11 +32,11 @@ addStatsDiag(x, K, clustnew, n, x_bar, SCL, m, lambda, S, nu, beta, S_0,
 
 \item{S_0}{The prior scale vector}
 
+\item{lambda_0}{The prior mean variance}
+
 \item{mu_0}{The prior mean}
 
 \item{nu_0}{The prior degrees of freedom}
-
-\item{lamda_0}{The prior mean variance}
 }
 \value{
 Returns the updated statistics and posteriors.

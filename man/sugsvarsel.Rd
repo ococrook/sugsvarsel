@@ -24,6 +24,8 @@ See documentation for \code{pSelect} for more details.}
 \item{Model}{The method used for Model select, either PML, ML or Both. If you select both
 the PML will be used to perform model selection.}
 
+\item{mu_0}{The mean hyperparameter, default is the column means of the data matrix.}
+
 \item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
 
 \item{nu_0}{The degrees of freedom hyperparameter, the default value is \code{D}, where \code{D} is the number of variables.}
@@ -48,6 +50,8 @@ The default value is \code{c(0.5,0.5)}.}
     \code{MulticoreParam}, \code{DoparParam}, \ldots see the
     \code{BiocParallel} package for details. To revert to the
     origianl serial implementation, use \code{NULL}.}
+
+\item{Verbose}{Boolean to indicate whether or not to print curren iteration state}
 }
 \value{
 A vector of log marginal likelihoods, a matrix of memberships, the reorderings of the data and the associated feature sets.

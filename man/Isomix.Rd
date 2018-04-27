@@ -3,7 +3,7 @@
 \docType{data}
 \name{Isomix}
 \alias{Isomix}
-\title{Small data example dataset with clustering structure}
+\title{A dataset containing 250 observations and 2 variables with 5 clusters.}
 \format{A list of length three. The data has 250 rows and 2 variables
 \describe{
   \item{probIso}{The weights used to simulate the dataset}
@@ -12,8 +12,6 @@
 }}
 \usage{
 data(Isomix)
-
-A dataset containing 250 observations and 2 variables with 5 clusters.
 }
 \description{
 Small data example dataset with clustering structure

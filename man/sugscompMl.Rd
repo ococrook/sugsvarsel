@@ -17,6 +17,8 @@ sugscompMl(K, D, n, nu_0, S_0, lambda_0, nu, lambda, S)
 
 \item{S_0}{The prior scale vector}
 
+\item{lambda_0}{The prior mean variance}
+
 \item{nu}{The current posterior degrees of freedom}
 
 \item{lambda}{The current posterior mean variance}

@@ -13,7 +13,7 @@ compvarMarg(K, D, n, lambda_0, nu_0, S_0, m, nu, lambda, S)
 
 \item{n}{The vector indicating the number of observations in each cluster}
 
-\item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
+\item{lambda_0}{The prior mean variance}
 
 \item{nu_0}{The prior degrees of freedom}
 

@@ -25,7 +25,7 @@ sugsnewclustMarg(x, i, D, phi, betaHat, mu_0, lambda_0, nu_0, S_0, intfeatures)
 
 \item{S_0}{The prior scale vector.}
 
-\item{intfeature}{A binary vector indicating whether features are irrelevant (0) or relevant (1).}
+\item{intfeatures}{A binary vector indicating whether features are irrelevant (0) or relevant (1).}
 }
 \value{
 The unnormalised probability of belong to any of the currently unoccupied clusters.
