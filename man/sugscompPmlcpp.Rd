@@ -12,6 +12,8 @@ sugscompPmlcpp(X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0,
 
 \item{K}{An integer specifiying the number of clusters}
 
+\item{N}{The total number of people to be clustered}
+
 \item{D}{An integer specifiying the number of variables}
 
 \item{n}{A numeric vector contain the number of people already allocated to each cluster}

@@ -27,7 +27,7 @@ concentration parameter}
 
 \item{lambda_0}{The variance of the Guassian mean prior, the dafault value is \code{0.01}.}
 
-\item{intfeature}{A binary vector indicating whether features are irrelevant (0) or relevant (1).}
+\item{intfeature}{A binary vector of feature which are parition as irrelevant (0) or relevant (1).}
 }
 \value{
 The unnormalised probability of belong to any of the currently unoccupied clusters.

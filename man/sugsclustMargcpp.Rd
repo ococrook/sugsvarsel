@@ -29,6 +29,8 @@ concentration parameter}
 \item{S}{A numeric matrix containing the scale prior for each component}
 
 \item{lambda}{A numeric vector containing the mean variance hyperparamter for each component}
+
+\item{intfeature}{A binary vector of feature which are parition as irrelevant (0) or relevant (1).}
 }
 \value{
 An arma::vec containg the probability that observation \code{x} belongs to each component
