@@ -51,6 +51,7 @@ sugsclusterProbcpp <- function(x, K, i, D, n, betaHat, phi, m, nu, S, lambda) {
 #' @param nu A numeric vector containg the degrees of freedom for each component
 #' @param S A numeric matrix containing the scale prior for each component
 #' @param lambda A numeric vector containing the mean variance hyperparamter for each component
+#' @param intfeature A binary vector of feature which are parition as irrelevant (0) or relevant (1).
 #'
 #' @return An arma::vec containg the probability that observation \code{x} belongs to each component
 #' @export
@@ -73,6 +74,8 @@ sugsnewclustMargcpp <- function(x, i, D, phi, betaHat, mu_0, nu_0, S_0, lambda_0
 #' @param X The data matrix with rows as observations
 #' @inheritParams sugsclustMargcpp
 #' @inheritParams sugs
+#' @param N The total number of people to be clustered
+#' 
 #' @return The log PML.
 #' @export
 sugscompPmlcpp <- function(X, K, N, D, n, phi, betaHat, m, nu, lambda, S, mu_0, nu_0, lambda_0, S_0) {
