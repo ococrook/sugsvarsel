@@ -11,6 +11,7 @@ Suggests: BiocStyle,
           rmarkdown,
           testthat
 LinkingTo: Rcpp, RcppArmadillo
+biocViews: Infrastructure
 Depends:
       metRology,
       Matrix,
