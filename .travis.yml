@@ -1,7 +1,6 @@
 language: r
 sudo: false
 dist: trusty
-os: windows
 
 r: bioc-release
 
