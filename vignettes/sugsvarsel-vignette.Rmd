@@ -1,17 +1,17 @@
 ---
-title: " Statistical methods for clustering and variable selection implemented in the *sugsvarsel* package"
+title: "Statistical methods for clustering and variable selection implemented in the *sugsvarsel* package"
 author: 
 - name: "Oliver  M. Crook"
   affiliation: University of Cambridge
 output: BiocStyle::html_document 
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Statistical methods for clustering and variable selection implemented in the sugsvarsel package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 
-# Introduction {#sec:Intro}
+# Introduction 
 
 This vignette details the algorithms in the sugsvarsel package, including how the data should be provided as well as some of the post processing function available. This included the original SUGS algorithm: Wang and Dunson (2011) as well as the SUGS VarSel algorithm of Crook et al. (2017)
 
@@ -179,4 +179,10 @@ If you would like to specifiy a specifc back-end you can provide an instance of 
 registered()
 param <- SnowParam(workers = 4, type = "SOCK")
 system.time(sugsvarsel(IsoNoise, 1, 100, intfeatures, numSelect, Model="ML", BPPARAM = param))
+```
+
+# Session information
+
+```{r}
+sessionInfo()
 ```
