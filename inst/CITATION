@@ -12,7 +12,7 @@ textVersion =
   paste("Oliver M. Crook, Laurent Gatto and Paul D. W. Kirk",
               "Fast approximate inference for variable selection in 
               Dirichlet process mixtures, with an application to
-              pan-cancer proteomics", arXiv:1810.05450
+              pan-cancer proteomics", "arXiv:1810.05450"
   )
 
 )
