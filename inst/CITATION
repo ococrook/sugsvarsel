@@ -1,6 +1,26 @@
 citHeader("To cite sugsvarsel in publications use:")
 
 citEntry(entry = "Article",
+title = "Fast approximate inference for variable selection in
+Dirichlet process mixtures, with an application to
+pan-cancer proteomics",
+author = personList(as.person("Oliver M. Crook"), as.person("Laurent Gatto"), as.person(Paul D.W. Kirk)),
+journal = "arXiv",
+year = "2018",
+
+textVersion =
+  paste("Oliver M. Crook, Laurent Gatto and Paul D. W. Kirk",
+              "Fast approximate inference for variable selection in 
+              Dirichlet process mixtures, with an application to
+              pan-cancer proteomics", arXiv:1810.05450
+  )
+
+)
+
+
+
+
+citEntry(entry = "Article",
 title = "Fast Bayesian inference in Dirichlet process mixture models",
 author = personList(as.person(" Lianming Wang"), as.person("David B. Dunson")),
 journal = "Journal of Computational and Graphical Statistics",
